@@ -2,22 +2,24 @@ package com.apps.PortfolioApp.Model.Entity;
 
 import jakarta.persistence.*;
 
-@Table(name = "Project")
+@Table(name = "projects")
 @Entity
 public class Project {
     //  here I will Create Class variables :
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id ;
+    private Integer id ;
     private String name;
     private String description;
+    @Column(name = "tech_stack")
     private String techStack;
+    @Column(name = "github_link")
     private String githubLink;
 
     // here I will Create a constructor :
     public Project() {}
 
-    public Project(int id, String name, String description, String techStack, String githubLink) {
+    public Project(Integer id, String name, String description, String techStack, String githubLink) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -26,11 +28,11 @@ public class Project {
     }
 
     // Getter && Setter
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 
 public class ProjectDTO {
     //  here I will Create Class variables :
-    private int id ;
+    private Integer id ;
     @NotBlank(message = "The project name must not be empty")
     @Max(50)
     private String name;
@@ -26,7 +26,7 @@ public class ProjectDTO {
     // here I will Create a constructor :
     public ProjectDTO() {}
 
-    public ProjectDTO(int id, String name, String description, String techStack, String githubLink) {
+    public ProjectDTO(Integer id, String name, String description, String techStack, String githubLink) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -35,11 +35,11 @@ public class ProjectDTO {
     }
 
     // Getter && Setter
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

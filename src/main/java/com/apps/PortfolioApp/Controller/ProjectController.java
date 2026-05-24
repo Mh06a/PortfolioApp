@@ -46,7 +46,7 @@ public class ProjectController {
     //step7 ----> create a function to update the project to db:
     @PutMapping("/{name}")
     public ProjectDTO update(@PathVariable String name , @RequestBody ProjectDTO projectDTO){
-        return this.projectService.updateProject(projectDTO);
+        return this.projectService.updateProject(name, projectDTO);
     }
 
     //step8----> create a function to delete the Specific project by id from db:

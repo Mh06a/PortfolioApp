@@ -46,8 +46,8 @@ public class ProjectService {
 
 
     // step6 ----> here I will Create a function update a project from db :
-    public ProjectDTO updateProject(ProjectDTO projectDTO) {
-        Project project = projectRepository.findById(projectDTO.getId()).orElseThrow();
+    public ProjectDTO updateProject(String name ,ProjectDTO projectDTO) {
+        Project project = projectRepository.findByName(name).orElseThrow();
         project.setName(projectDTO.getName());
         project.setDescription(projectDTO.getDescription());
         project.setTechStack(projectDTO.getTechStack());

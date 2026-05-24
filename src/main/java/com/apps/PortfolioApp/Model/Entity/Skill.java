@@ -2,7 +2,7 @@ package com.apps.PortfolioApp.Model.Entity;
 
 import jakarta.persistence.*;
 
-@Table(name = "Skill")
+@Table(name = "skills")
 @Entity
 public class Skill {
     // here I will Create Class variables :

@@ -8,7 +8,7 @@ public class Skill {
     // here I will Create Class variables :
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     private String level;
     private String icon;
@@ -16,7 +16,7 @@ public class Skill {
     // here I will Create a constructor :
     public Skill() {}
 
-    public Skill(int id, String name, String level, String icon) {
+    public Skill(Integer id, String name, String level, String icon) {
         this.id = id;
         this.name = name;
         this.level = level;
@@ -24,11 +24,11 @@ public class Skill {
     }
 
     // getter && setter
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 
 public class SkillDTO {
     // here I will Create Class variables :
-    private int id;
+    private Integer id;
     // ---------------
     @NotBlank(message = "The skill name must not be empty")
     @Max(50)
@@ -24,7 +24,7 @@ public class SkillDTO {
     // here I will Create a constructor :
     public SkillDTO() {}
 
-    public SkillDTO(int id, String name, String level, String icon) {
+    public SkillDTO(Integer id, String name, String level, String icon) {
         this.id = id;
         this.name = name;
         this.level = level;
@@ -32,11 +32,11 @@ public class SkillDTO {
     }
 
     // getter && setter
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

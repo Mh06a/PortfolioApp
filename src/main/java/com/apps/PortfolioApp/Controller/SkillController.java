@@ -46,7 +46,7 @@ public class SkillController {
     //step7 ----> create a function to update the skill to db:
     @PutMapping("/{name}")
     public SkillDTO update(@PathVariable String name , @RequestBody SkillDTO skillDTO) {
-        return this.skillService.updateSkill(skillDTO);
+        return this.skillService.updateSkill(name , skillDTO);
     }
 
     //step8----> create a function to delete the Specific skill by id from db:

@@ -46,8 +46,8 @@ public class SkillService {
 
 
     // step6 ----> here I will Create a function update a skill from db :
-    public SkillDTO updateSkill(SkillDTO skillDTO) {
-        Skill skill = skillRepository.findById(skillDTO.getId()).orElseThrow();
+    public SkillDTO updateSkill(String name,SkillDTO skillDTO) {
+        Skill skill = skillRepository.findByName(name).orElseThrow();
         skill.setName(skillDTO.getName());
         skill.setLevel(skillDTO.getLevel());
         skill.setIcon(skillDTO.getIcon());

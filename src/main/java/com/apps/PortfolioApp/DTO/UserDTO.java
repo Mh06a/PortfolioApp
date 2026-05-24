@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 
 public class UserDTO {
     // here I will Create Class variables :
-    private int id ;
+    private Integer id ;
     // ---------------
     @NotBlank(message = "The username must not be blank")
     @Size(min = 4 , max = 20 )
@@ -19,18 +19,18 @@ public class UserDTO {
     // here I will Create a constructor :
     public UserDTO() {}
 
-    public UserDTO(int id, String username, String password) {
+    public UserDTO(Integer id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
     }
 
     // getter && setter
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

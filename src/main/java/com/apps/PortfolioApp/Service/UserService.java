@@ -47,8 +47,8 @@ public class UserService {
 
 
     // step6 ----> here I will Create a function update user from db :
-    public UserDTO updateUser(UserDTO userDTO) {
-        User user = userRepository.findById(userDTO.getId()).orElseThrow();
+    public UserDTO updateUser(int id, UserDTO userDTO) {
+        User user = userRepository.findById(id).orElseThrow();
         user.setUsername(userDTO.getUsername());
         user.setPassword(userDTO.getPassword());
         return UserDTO.fromEntityToDTO(userRepository.save(user));

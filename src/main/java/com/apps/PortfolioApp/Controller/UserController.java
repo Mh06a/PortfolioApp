@@ -44,9 +44,9 @@ public class UserController {
     }
 
     //step7 ----> create a function to update the user to db:
-    @PutMapping("/{username}")
-    public UserDTO update(@PathVariable String username , @RequestBody UserDTO userDTO) {
-        return userService.updateUser(userDTO);
+    @PutMapping("/{id}")
+    public UserDTO update(@PathVariable int id , @RequestBody UserDTO userDTO) {
+        return userService.updateUser(id , userDTO);
     }
 
     //step8----> create a function to delete the Specific user by id from db:

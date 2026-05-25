@@ -45,7 +45,7 @@ public class GlobalExceptionHandler {
 
 
     // here I will Create a function to handle DuplicateProjectException :
-    @ExceptionHandler(DuplicateSkillException.class)
+    @ExceptionHandler(DuplicateProjectException.class)
     public ResponseEntity<ErrorResponse> handleDuplicateProjectException(DuplicateProjectException exception) {
         ErrorResponse error = new ErrorResponse(exception.getMessage(), HttpStatus.CONFLICT.value() , LocalDateTime.now());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);

@@ -8,7 +8,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/skills")
-@Valid
 public class SkillController {
 
     //Step1 ----> Create an object from Skill Service class :
@@ -21,7 +20,7 @@ public class SkillController {
 
     //step3 ----> create a function to save the skill to db:
     @PostMapping
-    public SkillDTO insert(@RequestBody SkillDTO skillDTO) {
+    public SkillDTO insert(@RequestBody @Valid SkillDTO skillDTO) {
         return this.skillService.insertSkill(skillDTO);
     }
 
@@ -45,7 +44,7 @@ public class SkillController {
 
     //step7 ----> create a function to update the skill to db:
     @PutMapping("/{name}")
-    public SkillDTO update(@PathVariable String name , @RequestBody SkillDTO skillDTO) {
+    public SkillDTO update(@PathVariable String name , @RequestBody @Valid SkillDTO skillDTO) {
         return this.skillService.updateSkill(name , skillDTO);
     }
 

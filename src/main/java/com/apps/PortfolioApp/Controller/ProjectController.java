@@ -8,7 +8,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/projects")
-@Valid
 public class ProjectController {
 
     //Step1 ----> Create an object from Project Service class :
@@ -21,7 +20,7 @@ public class ProjectController {
 
     //step3 ----> create a function to save the project to db:
     @PostMapping
-    public ProjectDTO insert(@RequestBody ProjectDTO projectDTO) {
+    public ProjectDTO insert(@RequestBody @Valid ProjectDTO projectDTO) {
         return this.projectService.insertProject(projectDTO);
     }
 
@@ -45,7 +44,7 @@ public class ProjectController {
 
     //step7 ----> create a function to update the project to db:
     @PutMapping("/{name}")
-    public ProjectDTO update(@PathVariable String name , @RequestBody ProjectDTO projectDTO){
+    public ProjectDTO update(@PathVariable String name , @RequestBody @Valid ProjectDTO projectDTO){
         return this.projectService.updateProject(name, projectDTO);
     }
 

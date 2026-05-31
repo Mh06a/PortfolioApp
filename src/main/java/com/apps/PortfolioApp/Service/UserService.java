@@ -1,12 +1,11 @@
 package com.apps.PortfolioApp.Service;
 
 import com.apps.PortfolioApp.DTO.UserDTO;
+import com.apps.PortfolioApp.ExceptionHandler.UserNotFoundException;
 import com.apps.PortfolioApp.Model.Entity.User;
 import com.apps.PortfolioApp.Repository.UserRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -37,18 +36,17 @@ public class UserService {
 
     // step5 ----> here I will Create a function to get user by id :
     public UserDTO getUserByID(int id) {
-        Optional<User> userOptional = userRepository.findById(id);
-        if (userOptional.isPresent()) {
-            return UserDTO.fromEntityToDTO(userOptional.orElse(null));
-        }
-        else
-            return null;
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new  UserNotFoundException("User not found with id: " + id));
+        return UserDTO.fromEntityToDTO(user);
     }
 
 
     // step6 ----> here I will Create a function update user from db :
     public UserDTO updateUser(int id, UserDTO userDTO) {
-        User user = userRepository.findById(id).orElseThrow();
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new UserNotFoundException("User not found with id: " + id)
+        );
         user.setUsername(userDTO.getUsername());
         user.setPassword(userDTO.getPassword());
         return UserDTO.fromEntityToDTO(userRepository.save(user));
@@ -57,18 +55,19 @@ public class UserService {
 
     // step7 ----> here I will Create a function delete user from db :
     public void deleteUser(int id) {
-        userRepository.deleteById(id);
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new UserNotFoundException("User not found with id: " + id)
+        );
+        userRepository.delete(user);
     }
 
 
     // step8 ----> here I will Create a function to find by username :
     public UserDTO getByUsername(String username) {
-        Optional<User> userOptional = userRepository.findByUsername(username);
-        if (userOptional.isPresent()) {
-            return UserDTO.fromEntityToDTO(userOptional.orElse(null));
-        }
-        else
-            return null;
+        User user = userRepository.findByUsername(username).orElseThrow(
+                () -> new UserNotFoundException("User not found with username: " + username)
+        );
+        return UserDTO.fromEntityToDTO(user);
     }
 
 }

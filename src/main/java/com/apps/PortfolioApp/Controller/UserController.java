@@ -8,7 +8,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-@Valid
 public class UserController {
 
     //Step1 ----> Create an object from User Service class :
@@ -21,7 +20,7 @@ public class UserController {
 
     //step3 ----> create a function to save the user to db:
     @PostMapping
-    public UserDTO insert(@RequestBody UserDTO userDTO) {
+    public UserDTO insert(@RequestBody @Valid UserDTO userDTO) {
         return userService.insertUser(userDTO);
     }
 
@@ -45,7 +44,7 @@ public class UserController {
 
     //step7 ----> create a function to update the user to db:
     @PutMapping("/{id}")
-    public UserDTO update(@PathVariable int id , @RequestBody UserDTO userDTO) {
+    public UserDTO update(@PathVariable int id , @RequestBody @Valid UserDTO userDTO) {
         return userService.updateUser(id , userDTO);
     }
 

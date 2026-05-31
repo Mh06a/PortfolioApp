@@ -1,26 +1,26 @@
 package com.apps.PortfolioApp.DTO;
 
 import com.apps.PortfolioApp.Model.Entity.Project;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public class ProjectDTO {
     //  here I will Create Class variables :
     private Integer id ;
     @NotBlank(message = "The project name must not be empty")
-    @Max(50)
+    @Size(max = 50)
     private String name;
     // ---------------
     @NotBlank(message = "The project description must not be empty")
-    @Max(100)
+    @Size(max = 100)
     private String description;
     // ---------------
     @NotBlank(message = "The project techStack must not be empty")
-    @Max(50)
+    @Size(max = 50)
     private String techStack;
     // ---------------
     @NotBlank(message = "The project githubLink must not be empty")
-    @Max(100)
+    @Size(max = 100)
     private String githubLink;
 
     // here I will Create a constructor :

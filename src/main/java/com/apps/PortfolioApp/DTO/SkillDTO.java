@@ -1,23 +1,23 @@
 package com.apps.PortfolioApp.DTO;
 
 import com.apps.PortfolioApp.Model.Entity.Skill;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public class SkillDTO {
     // here I will Create Class variables :
     private Integer id;
     // ---------------
     @NotBlank(message = "The skill name must not be empty")
-    @Max(50)
+    @Size(max = 50)
     private String name;
     // ---------------
     @NotBlank(message = "The skill level must not be empty")
-    @Max(50)
+    @Size(max = 50)
     private String level;
     // ---------------
     @NotBlank(message = "The skill logo should not be empty")
-    @Max(100)
+    @Size(max = 100)
     private String icon;
 
 

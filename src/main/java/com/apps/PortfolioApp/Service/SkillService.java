@@ -1,12 +1,11 @@
 package com.apps.PortfolioApp.Service;
-
 import com.apps.PortfolioApp.DTO.SkillDTO;
+import com.apps.PortfolioApp.ExceptionHandler.DuplicateSkillException;
+import com.apps.PortfolioApp.ExceptionHandler.SkillNotFoundException;
 import com.apps.PortfolioApp.Model.Entity.Skill;
 import com.apps.PortfolioApp.Repository.SkillRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
-
 @Service
 public class SkillService {
 
@@ -29,25 +28,30 @@ public class SkillService {
 
     // step4 ----> here I will Create a function to get all Skills from db :
     public List<SkillDTO> getAllSkills() {
-        List<Skill> skills = skillRepository.findAll();
-        return skills.stream().map(SkillDTO::fromEntityToDTO).toList();
+        if (skillRepository.findAll().isEmpty()) {
+            throw new SkillNotFoundException("You don't have any skill");
+        }
+        else {
+            List<Skill> skills = skillRepository.findAll();
+            return skills.stream().map(SkillDTO::fromEntityToDTO).toList();
+        }
     }
 
 
     // step5 ----> here I will Create a function to get a skill by id :
     public SkillDTO getSkillByID(int id) {
-        Optional<Skill> skillOptional = skillRepository.findById(id);
-        if (skillOptional.isPresent()) {
-            return SkillDTO.fromEntityToDTO(skillOptional.orElse(null));
-        }
-        else
-            return null;
+        Skill skill = skillRepository.findById(id).orElseThrow(
+                () -> new SkillNotFoundException("Skill not found with id: " + id)
+        );
+        return SkillDTO.fromEntityToDTO(skill);
     }
 
 
     // step6 ----> here I will Create a function update a skill from db :
     public SkillDTO updateSkill(String name,SkillDTO skillDTO) {
-        Skill skill = skillRepository.findByName(name).orElseThrow();
+        Skill skill = skillRepository.findByName(name).orElseThrow(
+                () -> new SkillNotFoundException("Skill not found with name: " + name)
+        );
         skill.setName(skillDTO.getName());
         skill.setLevel(skillDTO.getLevel());
         skill.setIcon(skillDTO.getIcon());
@@ -57,18 +61,19 @@ public class SkillService {
 
     // step7 ----> here I will Create a function delete a skill from db :
     public void deleteSkill(int id) {
-        skillRepository.deleteById(id);
+        Skill skill = skillRepository.findById(id).orElseThrow(
+                () -> new SkillNotFoundException("Skill not found with id: " + id)
+        );
+        skillRepository.delete(skill);
     }
 
 
     // step8 ----> here I will Create a function to find by Skill name :
     public SkillDTO getByName(String name) {
-        Optional<Skill> skillOptional = skillRepository.findByName(name);
-        if (skillOptional.isPresent()) {
-            return SkillDTO.fromEntityToDTO(skillOptional.orElse(null));
-        }
-        else
-            return null ;
+        Skill skill = skillRepository.findByName(name).orElseThrow(
+                () -> new SkillNotFoundException("Skill not found with skill name: " + name)
+        );
+        return SkillDTO.fromEntityToDTO(skill);
     }
 
 }

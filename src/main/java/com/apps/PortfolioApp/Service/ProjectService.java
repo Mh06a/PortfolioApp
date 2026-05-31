@@ -1,11 +1,12 @@
 package com.apps.PortfolioApp.Service;
 
 import com.apps.PortfolioApp.DTO.ProjectDTO;
+import com.apps.PortfolioApp.ExceptionHandler.DuplicateProjectException;
+import com.apps.PortfolioApp.ExceptionHandler.ProjectNotFoundException;
 import com.apps.PortfolioApp.Model.Entity.Project;
 import com.apps.PortfolioApp.Repository.ProjectRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProjectService {
@@ -29,25 +30,30 @@ public class ProjectService {
 
     // step4 ----> here I will Create a function to get all projects from db :
     public List<ProjectDTO> getAllProjects() {
-        List<Project> projects = projectRepository.findAll();
-        return projects.stream().map(ProjectDTO::fromEntityToDTO).toList();
+        if (projectRepository.findAll().isEmpty()) {
+            throw new ProjectNotFoundException("You don't have any project");
+        }
+        else {
+            List<Project> projects = projectRepository.findAll();
+            return projects.stream().map(ProjectDTO::fromEntityToDTO).toList();
+        }
     }
 
 
     // step5 ----> here I will Create a function to get a project by id :
     public ProjectDTO getProjectByID(int id) {
-        Optional<Project> projectOptional = projectRepository.findById(id);
-        if (projectOptional.isPresent()) {
-            return ProjectDTO.fromEntityToDTO(projectOptional.orElse(null));
-        }
-        else
-            return null;
+        Project project = projectRepository.findById(id).orElseThrow(
+                () -> new ProjectNotFoundException("Project not found with id: " + id)
+        );
+        return ProjectDTO.fromEntityToDTO(project);
     }
 
 
     // step6 ----> here I will Create a function update a project from db :
     public ProjectDTO updateProject(String name ,ProjectDTO projectDTO) {
-        Project project = projectRepository.findByName(name).orElseThrow();
+        Project project = projectRepository.findByName(name).orElseThrow(
+                () -> new ProjectNotFoundException("Project not found with name: " + name)
+        );
         project.setName(projectDTO.getName());
         project.setDescription(projectDTO.getDescription());
         project.setTechStack(projectDTO.getTechStack());
@@ -58,18 +64,19 @@ public class ProjectService {
 
     // step7 ----> here I will Create a function delete a project from db :
     public void deleteProject(int id) {
-        projectRepository.deleteById(id);
+        Project project = projectRepository.findById(id).orElseThrow(
+                () -> new ProjectNotFoundException("Project not found with id: " + id)
+        );
+        projectRepository.delete(project);
     }
 
 
     // step8 ----> here I will Create a function to find by Skill name :
     public ProjectDTO getProjectByName(String name) {
-        Optional<Project> projectOptional = projectRepository.findByName(name);
-        if (projectOptional.isPresent()) {
-            return ProjectDTO.fromEntityToDTO(projectOptional.orElse(null)) ;
-        }
-        else
-            return  null;
+        Project project = projectRepository.findByName(name).orElseThrow(
+                () -> new ProjectNotFoundException("Project not found with project name: " + name)
+        );
+        return ProjectDTO.fromEntityToDTO(project);
     }
 
 }

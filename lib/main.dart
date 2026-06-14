@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:protfolio_app/Views/main_screen.dart';
 import 'package:protfolio_app/utils/app_theme.dart';
 
 void main() {
@@ -13,6 +14,7 @@ class ProtfolioApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
+      home: MainScreen(),
     );
   }
 }

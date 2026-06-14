@@ -4,7 +4,7 @@ import 'package:protfolio_app/Views/contact_screen.dart';
 import 'package:protfolio_app/Views/home_screen.dart';
 import 'package:protfolio_app/Views/skills_screen.dart';
 import 'package:protfolio_app/widgets/custom_bottom_nav.dart';
-import 'package:protfolio_app/widgets/project_card.dart';
+import 'package:protfolio_app/Views/projects_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

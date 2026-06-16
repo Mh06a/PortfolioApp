@@ -1,14 +1,14 @@
 class Skill {
   //step1 ----> here I will Create the class's variables :
   final int id;
-  final String skillName;
+  final String name;
   final String level;
   final String icon;
 
   //step2 ----> here I will Create The constructor :
   Skill({
     required this.id,
-    required this.skillName,
+    required this.name,
     required this.level,
     required this.icon,
   });
@@ -17,7 +17,7 @@ class Skill {
   factory Skill.fromJson(Map<String, dynamic> json) {
     return Skill(
       id: json['id'],
-      skillName: json['skillName'],
+      name: json['name'],
       level: json['level'],
       icon: json['icon'],
     );

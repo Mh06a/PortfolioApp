@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:protfolio_app/Models/skill.dart';
 import 'package:protfolio_app/Views/main_screen.dart';
-import 'package:protfolio_app/services/project_service.dart';
 import 'package:protfolio_app/services/skill_service.dart';
 import 'package:protfolio_app/utils/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final skills = await SkillService().getAllSkills();
-  final projects = await ProjectService().getAllProjects();
+  Skill skill = Skill(
+    id: 4,
+    name: "Flutter",
+    level: "Intermediate",
+    icon: "Flutter_icon",
+  );
 
-  for (var skill in skills) {
-    print(skill.name);
-  }
+  final result = await SkillService().updateSkill("Flutter", skill);
 
-  print("-------------------------------------");
+  print(result.id);
+  print(result.name);
+  print(result.level);
+  print(result.icon);
 
-  for (var pr in projects) {
-    print(pr.name);
-  }
+  print("-----------------------------------------------------");
 
   runApp(const ProtfolioApp());
 }

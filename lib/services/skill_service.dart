@@ -17,10 +17,6 @@ class SkillService {
       return data.map((skill) => Skill.fromJson(skill)).toList();
     }
 
-    if (response.statusCode == 404) {
-      throw NotFoundException("Skill not found");
-    }
-
     throw Exception("Failed");
   }
 

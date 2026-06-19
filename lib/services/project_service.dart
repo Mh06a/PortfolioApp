@@ -17,10 +17,6 @@ class ProjectService {
       return data.map((project) => Project.fromJson(project)).toList();
     }
 
-    if (response.statusCode == 404) {
-      throw NotFoundException("Project not found");
-    }
-
     throw Exception("Failed");
   }
 

@@ -14,10 +14,6 @@ class UserService {
       final List<dynamic> data = jsonDecode(response.body);
       return data.map((user) => User.fromJson(user)).toList();
     }
-
-    if (response.statusCode == 4004) {
-      throw NotFoundException("User not found");
-    }
     throw Exception("Failed");
   }
 

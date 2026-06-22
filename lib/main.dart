@@ -1,25 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:protfolio_app/Models/skill.dart';
 import 'package:protfolio_app/Views/main_screen.dart';
-import 'package:protfolio_app/services/skill_service.dart';
 import 'package:protfolio_app/utils/app_theme.dart';
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
-  Skill skill = Skill(
-    id: 4,
-    name: "Flutter",
-    level: "Intermediate",
-    icon: "Flutter_icon",
-  );
-
-  final result = await SkillService().updateSkill("Flutter", skill);
-
-  print(result.id);
-  print(result.name);
-  print(result.level);
-  print(result.icon);
 
   print("-----------------------------------------------------");
 

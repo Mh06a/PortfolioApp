@@ -39,10 +39,7 @@ class CustomBottomNavigation extends StatelessWidget {
           label: "About",
         ),
 
-        BottomNavigationBarItem(
-          icon: Icon(Icons.mail_outline),
-          label: "Contact",
-        ),
+        BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
       ],
     );
   }

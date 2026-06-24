@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:protfolio_app/Views/about_screen.dart';
-import 'package:protfolio_app/Views/contact_screen.dart';
+import 'package:protfolio_app/Views/settings_screen.dart';
 import 'package:protfolio_app/Views/home_screen.dart';
 import 'package:protfolio_app/Views/skills_screen.dart';
 import 'package:protfolio_app/widgets/custom_bottom_nav.dart';
@@ -22,7 +22,7 @@ class _MainScreenState extends State<MainScreen> {
     SkillsScreen(),
     ProjectsScreen(),
     AboutScreen(),
-    ContactScreen(),
+    SettingsScreen(),
   ];
 
   //step2 ----> call a build function :

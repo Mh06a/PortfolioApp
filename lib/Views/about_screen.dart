@@ -21,7 +21,7 @@ class _AboutScreenState extends State<AboutScreen> {
   }
 
   Future<void> _loadData() async {
-    await _profileController.loadProfile(2);
+    await _profileController.loadProfile(3);
     setState(() {});
   }
 
@@ -151,7 +151,7 @@ class _AboutScreenState extends State<AboutScreen> {
                         ListTile(
                           leading: Icon(Icons.email),
                           title: Text("Email"),
-                          subtitle: Text("mansour@example.com"),
+                          subtitle: Text(profile?.email ?? ""),
                           trailing: Icon(Icons.open_in_new),
                           onTap: () {},
                         ),
@@ -161,7 +161,7 @@ class _AboutScreenState extends State<AboutScreen> {
                         ListTile(
                           leading: Icon(Icons.code),
                           title: Text("GitHub"),
-                          subtitle: Text("github.com/Mh06a"),
+                          subtitle: Text(profile?.githubLink ?? ""),
                           trailing: Icon(Icons.open_in_new),
                           onTap: () {},
                         ),
@@ -171,7 +171,7 @@ class _AboutScreenState extends State<AboutScreen> {
                         ListTile(
                           leading: Icon(Icons.business),
                           title: Text("LinkedIn"),
-                          subtitle: Text("linkedin.com/in/mansour"),
+                          subtitle: Text(profile?.linkedinLink ?? ""),
                           trailing: Icon(Icons.open_in_new),
                           onTap: () {},
                         ),

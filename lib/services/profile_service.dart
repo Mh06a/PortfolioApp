@@ -33,8 +33,10 @@ class ProfileService {
         "fullName": profile.fullName,
         "specialization": profile.specialization,
         "bio": profile.bio,
-        "profileImage": profile.profileImage,
         "yearsOfExperience": profile.yearsOfExperience,
+        "email": profile.email,
+        "githubLink": profile.githubLink,
+        "linkedinLink": profile.linkedinLink,
       }),
     );
 
@@ -56,11 +58,15 @@ class ProfileService {
         "fullName": profile.fullName,
         "specialization": profile.specialization,
         "bio": profile.bio,
-        "profileImage": profile.profileImage,
         "yearsOfExperience": profile.yearsOfExperience,
+        "email": profile.email,
+        "githubLink": profile.githubLink,
+        "linkedinLink": profile.linkedinLink,
       }),
     );
 
+    print(response.statusCode);
+    print(response.body);
     if (response.statusCode == 200) {
       return Profile.fromJson(jsonDecode(response.body));
     }

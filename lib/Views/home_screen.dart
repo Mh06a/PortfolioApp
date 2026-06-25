@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _loadData() async {
-    await _profileController.loadProfile(2);
+    await _profileController.loadProfile(3);
     await _skillController.loadSkills();
     await _projectController.loadProjects();
     setState(() {});

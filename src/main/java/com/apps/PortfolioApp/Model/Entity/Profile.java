@@ -28,9 +28,6 @@ public class Profile {
     private String bio;
     @Setter
     @Getter
-    private String profileImage;
-    @Setter
-    @Getter
     private Integer yearsOfExperience;
     @Setter
     @Getter
@@ -46,13 +43,12 @@ public class Profile {
     public Profile() {
     }
 
-    public Profile(Integer id, String fullName, String specialization, String bio, String profileImage,
+    public Profile(Integer id, String fullName, String specialization, String bio,
             int yearsOfExperience , String email ,  String githubLink ,  String linkedinLink) {
         this.id = id;
         this.fullName = fullName;
         this.specialization = specialization;
         this.bio = bio;
-        this.profileImage = profileImage;
         this.yearsOfExperience = yearsOfExperience;
         this.email = email;
         this.githubLink = githubLink ;

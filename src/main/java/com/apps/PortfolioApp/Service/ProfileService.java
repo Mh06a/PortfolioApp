@@ -40,7 +40,6 @@ public class ProfileService {
         profile.setFullName(profileDTO.getFullName());
         profile.setSpecialization(profileDTO.getSpecialization());
         profile.setBio(profileDTO.getBio());
-        profile.setProfileImage(profileDTO.getProfileImage());
         profile.setYearsOfExperience(profileDTO.getYearsOfExperience());
         profile.setEmail(profileDTO.getEmail());
         profile.setGithubLink(profileDTO.getGithubLink());

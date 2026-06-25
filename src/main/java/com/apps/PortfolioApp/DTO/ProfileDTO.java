@@ -36,12 +36,6 @@ public class ProfileDTO {
 
     @Setter
     @Getter
-    @NotBlank(message = "The profileImage must not be blank")
-    @Size(max = 100)
-    private String profileImage;
-
-    @Setter
-    @Getter
     @NotNull(message = "The yearsOfExperience must not be blank")
     @Min(value = 0, message = "Years of experience cannot be negative")
     @Max(value = 50, message = "Years of experience cannot exceed 50")
@@ -70,14 +64,13 @@ public class ProfileDTO {
     }
 
     public ProfileDTO(Integer id,  String fullName,  String specialization,
-            String bio, String profileImage, Integer yearsOfExperience,
+            String bio, Integer yearsOfExperience,
             String email , String githubLink , String linkedinLink) {
 
         this.id = id;
         this.fullName = fullName;
         this.specialization = specialization;
         this.bio = bio;
-        this.profileImage = profileImage;
         this.yearsOfExperience = yearsOfExperience;
         this.email = email ;
         this.githubLink = githubLink;
@@ -93,7 +86,6 @@ public class ProfileDTO {
         profileDTO.setFullName(profile.getFullName());
         profileDTO.setSpecialization(profile.getSpecialization());
         profileDTO.setBio(profile.getBio());
-        profileDTO.setProfileImage(profile.getProfileImage());
         profileDTO.setYearsOfExperience(profile.getYearsOfExperience());
         profileDTO.setEmail(profile.getEmail());
         profileDTO.setGithubLink(profile.getGithubLink());
@@ -108,7 +100,6 @@ public class ProfileDTO {
         profile.setFullName(profileDTO.getFullName());
         profile.setSpecialization(profileDTO.getSpecialization());
         profile.setBio(profileDTO.getBio());
-        profile.setProfileImage(profileDTO.getProfileImage());
         profile.setYearsOfExperience(profileDTO.getYearsOfExperience());
         profile.setEmail(profileDTO.getEmail());
         profile.setGithubLink(profileDTO.getGithubLink());

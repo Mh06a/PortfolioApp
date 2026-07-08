@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:protfolio_app/Views/main_screen.dart';
-import 'package:protfolio_app/utils/app_theme.dart';
+import 'package:protfolio_app/main_screen.dart';
+import 'package:protfolio_app/core/theme/app_theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
-  print("-----------------------------------------------------");
 
   runApp(const ProtfolioApp());
 }

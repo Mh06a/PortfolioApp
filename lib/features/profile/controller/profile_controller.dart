@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:protfolio_app/core/helpers/error_handler.dart';
 import 'package:protfolio_app/features/profile/model/profile.dart';
 import 'package:protfolio_app/features/profile/service/profile_service.dart';
 
-class ProfileController extends ChangeNotifier {
+class ProfileController {
   //step1 ----> here I will Create the class's variables :
   final ProfileService _service = ProfileService();
   Profile? _profile;
@@ -20,13 +19,11 @@ class ProfileController extends ChangeNotifier {
     try {
       _isLoading = true;
       _errorMessage = null;
-      notifyListeners();
       _profile = await _service.getProfileById(id);
     } catch (e) {
       _errorMessage = ErrorHandler.getMessage(e);
     } finally {
       _isLoading = false;
-      notifyListeners();
     }
   }
 
@@ -35,13 +32,11 @@ class ProfileController extends ChangeNotifier {
     try {
       _isLoading = true;
       _errorMessage = null;
-      notifyListeners();
       _profile = await _service.addProfile(profile);
     } catch (e) {
       _errorMessage = ErrorHandler.getMessage(e);
     } finally {
       _isLoading = false;
-      notifyListeners();
     }
   }
 
@@ -50,13 +45,11 @@ class ProfileController extends ChangeNotifier {
     try {
       _isLoading = true;
       _errorMessage = null;
-      notifyListeners();
       _profile = await _service.updateProfile(id, profile);
     } catch (e) {
       _errorMessage = ErrorHandler.getMessage(e);
     } finally {
       _isLoading = false;
-      notifyListeners();
     }
   }
 
@@ -65,14 +58,12 @@ class ProfileController extends ChangeNotifier {
     try {
       _isLoading = true;
       _errorMessage = null;
-      notifyListeners();
       await _service.deleteProfile(id);
       _profile = null;
     } catch (e) {
       _errorMessage = ErrorHandler.getMessage(e);
     } finally {
       _isLoading = false;
-      notifyListeners();
     }
   }
 }

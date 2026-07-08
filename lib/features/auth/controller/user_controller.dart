@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:protfolio_app/features/auth/model/user.dart';
 import 'package:protfolio_app/features/auth/service/user_service.dart';
 
-class UserController extends ChangeNotifier {
+class UserController {
   //step1 ----> here I will Create the class's variables :
   final UserService _service = UserService();
   User? _user;
@@ -20,14 +19,11 @@ class UserController extends ChangeNotifier {
       _isLoading = true;
       _errorMessage = null;
 
-      notifyListeners();
-
       _user = await _service.getUserById(id);
     } catch (e) {
       _errorMessage = e.toString();
     } finally {
       _isLoading = false;
-      notifyListeners();
     }
   }
 }

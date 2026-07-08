@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:protfolio_app/core/helpers/error_handler.dart';
 import 'package:protfolio_app/features/projects/model/project.dart';
 import 'package:protfolio_app/features/projects/service/project_service.dart';
 
-class ProjectController extends ChangeNotifier {
+class ProjectController {
   //step1 ----> here I will Create the class's variables :
   final ProjectService _service = ProjectService();
   List<Project> _projects = [];
@@ -20,14 +19,12 @@ class ProjectController extends ChangeNotifier {
     try {
       _isLoading = true;
       _errorMessage = null;
-      notifyListeners();
 
       _projects = await _service.getAllProjects();
     } catch (exception) {
       _errorMessage = ErrorHandler.getMessage(exception);
     } finally {
       _isLoading = false;
-      notifyListeners();
     }
   }
 
@@ -37,15 +34,12 @@ class ProjectController extends ChangeNotifier {
       _isLoading = true;
       _errorMessage = null;
 
-      notifyListeners();
-
       final newProject = await _service.addProject(project);
       _projects.add(newProject);
     } catch (e) {
       _errorMessage = ErrorHandler.getMessage(e);
     } finally {
       _isLoading = false;
-      notifyListeners();
     }
   }
 
@@ -54,8 +48,6 @@ class ProjectController extends ChangeNotifier {
     try {
       _isLoading = true;
       _errorMessage = null;
-
-      notifyListeners();
 
       final updatedProject = await _service.updateProject(name, project);
       final index = _projects.indexWhere((s) => s.name == name);
@@ -67,7 +59,6 @@ class ProjectController extends ChangeNotifier {
       _errorMessage = ErrorHandler.getMessage(exception);
     } finally {
       _isLoading = false;
-      notifyListeners();
     }
   }
 
@@ -77,8 +68,6 @@ class ProjectController extends ChangeNotifier {
       _isLoading = true;
       _errorMessage = null;
 
-      notifyListeners();
-
       await _service.deleteProject(id);
 
       _projects.removeWhere((project) => project.id == id);
@@ -86,7 +75,6 @@ class ProjectController extends ChangeNotifier {
       _errorMessage = ErrorHandler.getMessage(exception);
     } finally {
       _isLoading = false;
-      notifyListeners();
     }
   }
 }

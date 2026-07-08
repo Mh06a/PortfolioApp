@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:protfolio_app/core/helpers/error_handler.dart';
 import 'package:protfolio_app/features/skills/model/skill.dart';
 import 'package:protfolio_app/features/skills/service/skill_service.dart';
 
-class SkillController extends ChangeNotifier {
+class SkillController {
   //step1 ----> here I will Create the class's variables :
   final SkillService _service = SkillService();
   List<Skill> _skills = [];
@@ -20,14 +19,12 @@ class SkillController extends ChangeNotifier {
     try {
       _isLoading = true;
       _errorMessage = null;
-      notifyListeners();
 
       _skills = await _service.getAllSkills();
     } catch (exception) {
       _errorMessage = ErrorHandler.getMessage(exception);
     } finally {
       _isLoading = false;
-      notifyListeners();
     }
   }
 
@@ -37,15 +34,12 @@ class SkillController extends ChangeNotifier {
       _isLoading = true;
       _errorMessage = null;
 
-      notifyListeners();
-
       final newSkill = await _service.addSkill(skill);
       _skills.add(newSkill);
     } catch (e) {
       _errorMessage = ErrorHandler.getMessage(e);
     } finally {
       _isLoading = false;
-      notifyListeners();
     }
   }
 
@@ -54,8 +48,6 @@ class SkillController extends ChangeNotifier {
     try {
       _isLoading = true;
       _errorMessage = null;
-
-      notifyListeners();
 
       final updatedSkill = await _service.updateSkill(name, skill);
       final index = _skills.indexWhere((s) => s.name == name);
@@ -67,7 +59,6 @@ class SkillController extends ChangeNotifier {
       _errorMessage = ErrorHandler.getMessage(exception);
     } finally {
       _isLoading = false;
-      notifyListeners();
     }
   }
 
@@ -77,8 +68,6 @@ class SkillController extends ChangeNotifier {
       _isLoading = true;
       _errorMessage = null;
 
-      notifyListeners();
-
       await _service.deleteSkill(id);
 
       _skills.removeWhere((skill) => skill.id == id);
@@ -86,7 +75,6 @@ class SkillController extends ChangeNotifier {
       _errorMessage = ErrorHandler.getMessage(exception);
     } finally {
       _isLoading = false;
-      notifyListeners();
     }
   }
 }

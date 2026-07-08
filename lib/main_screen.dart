@@ -16,7 +16,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   //step1 ----> create Class variables :
   int _currentIndex = 0;
-  final GlobalKey<HomeScreenState> homeKey = GlobalKey<HomeScreenState>();
   late final List<Widget> _screens;
 
   @override
@@ -24,7 +23,7 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
 
     _screens = [
-      HomeScreen(key: homeKey),
+      HomeScreen(),
       SkillsScreen(),
       ProjectsScreen(),
       AboutScreen(),

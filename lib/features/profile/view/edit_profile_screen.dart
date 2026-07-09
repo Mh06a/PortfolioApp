@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:protfolio_app/features/profile/controller/profile_controller.dart';
 import 'package:protfolio_app/features/profile/model/profile.dart';
+import 'package:protfolio_app/features/profile/provider/profile_provider.dart';
 import 'package:protfolio_app/shared/widgets/custom_button.dart';
 import 'package:protfolio_app/shared/widgets/custom_snackbar.dart';
 import 'package:protfolio_app/shared/widgets/custom_textfield.dart';
+import 'package:provider/provider.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -14,7 +15,6 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   //step1 ----> here I will Create the class's variables :
-  final ProfileController _profileController = ProfileController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _specializationController =
       TextEditingController();
@@ -28,13 +28,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
     super.initState();
-    _loadData();
-  }
 
-  Future<void> _loadData() async {
-    await _profileController.loadProfile(3);
-
-    final profile = _profileController.profile;
+    final profile = context.read<ProfileProvider>().profile;
 
     if (profile != null) {
       _nameController.text = profile.fullName;
@@ -45,34 +40,36 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       _githubController.text = profile.githubLink;
       _linkedinController.text = profile.linkedinLink;
     }
-    setState(() {});
   }
 
   //step3 ----> here I will Create a function to update profile :
   Future<void> _updateProfile() async {
+    final provider = context.read<ProfileProvider>();
+
     final profile = Profile(
       id: 3,
-      fullName: _nameController.text,
-      specialization: _specializationController.text,
-      bio: _bioController.text,
+      fullName: _nameController.text.trim(),
+      specialization: _specializationController.text.trim(),
+      bio: _bioController.text.trim(),
       yearsOfExperience: int.tryParse(_yearsController.text) ?? 0,
-      email: _emailController.text,
-      githubLink: _githubController.text,
-      linkedinLink: _linkedinController.text,
+      email: _emailController.text.trim(),
+      githubLink: _githubController.text.trim(),
+      linkedinLink: _linkedinController.text.trim(),
     );
 
-    await _profileController.updateProfile(3, profile);
+    final success = await provider.updateProfile(profile);
 
-    if (!mounted) {
-      return;
-    }
+    if (!mounted) return;
 
-    if (_profileController.errorMessage == null) {
+    if (success) {
       CustomSnackbar.success(context, "Profile updated successfully");
 
       Navigator.pop(context, true);
     } else {
-      CustomSnackbar.error(context, _profileController.errorMessage!);
+      CustomSnackbar.error(
+        context,
+        provider.errorMessage ?? "Something went wrong",
+      );
     }
   }
 
@@ -92,6 +89,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   //step5 ----> here I will call build function to create the page :
   @override
   Widget build(BuildContext context) {
+    final provider = context.watch<ProfileProvider>();
     return Scaffold(
       appBar: AppBar(title: Text("Edit Profile")),
 
@@ -147,12 +145,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
             SizedBox(height: 24),
 
-            CustomButton(
-              tilte: "Update Profile",
-              icon: Icons.save,
-              width: double.infinity,
-              onPressed: _updateProfile,
-            ),
+            provider.isLoading
+                ? const CircularProgressIndicator()
+                : CustomButton(
+                    tilte: "Update Profile",
+                    icon: Icons.save,
+                    width: double.infinity,
+                    onPressed: _updateProfile,
+                  ),
           ],
         ),
       ),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:protfolio_app/features/projects/controller/project_controller.dart';
 import 'package:protfolio_app/features/projects/model/project.dart';
 import 'package:protfolio_app/shared/widgets/custom_button.dart';
 import 'package:protfolio_app/shared/widgets/custom_snackbar.dart';
 import 'package:protfolio_app/shared/widgets/custom_textfield.dart';
+import 'package:provider/provider.dart';
+import 'package:protfolio_app/features/projects/provider/project_provider.dart';
 
 class AddEditProjectScreen extends StatefulWidget {
   //step1 ----> here I will Create the class's variables :
@@ -16,7 +17,6 @@ class AddEditProjectScreen extends StatefulWidget {
 
 class _AddEditProjectScreenState extends State<AddEditProjectScreen> {
   //step1 ----> here I will Create the class's variables :
-  final ProjectController _projectController = ProjectController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _techStackController = TextEditingController();
@@ -38,35 +38,34 @@ class _AddEditProjectScreenState extends State<AddEditProjectScreen> {
 
   //step3 ----> here I will create function becasue save project  :
   Future<void> _saveProject() async {
+    final provider = context.read<ProjectProvider>();
+
     final project = Project(
       id: isEdit ? widget.project!.id : 0,
-      name: _nameController.text,
-      description: _descriptionController.text,
-      techStack: _techStackController.text,
-      githubLink: _githubController.text,
+      name: _nameController.text.trim(),
+      description: _descriptionController.text.trim(),
+      techStack: _techStackController.text.trim(),
+      githubLink: _githubController.text.trim(),
     );
 
-    if (isEdit) {
-      await _projectController.updateProject(widget.project!.name, project);
-    } else {
-      await _projectController.addProject(project);
-    }
+    final success = isEdit
+        ? await provider.updateProject(widget.project!.name, project)
+        : await provider.addProject(project);
 
-    if (!mounted) {
-      return;
-    }
+    if (!mounted) return;
 
-    if (_projectController.errorMessage == null) {
+    if (success) {
       CustomSnackbar.success(
         context,
-        widget.project == null
-            ? "Project updated successfully"
-            : "Project added successfully",
+        isEdit ? "Project updated successfully" : "Project added successfully",
       );
 
       Navigator.pop(context, true);
     } else {
-      CustomSnackbar.error(context, _projectController.errorMessage!);
+      CustomSnackbar.error(
+        context,
+        provider.errorMessage ?? "Something went wrong",
+      );
     }
   }
 
@@ -82,6 +81,7 @@ class _AddEditProjectScreenState extends State<AddEditProjectScreen> {
   //step4 ----> here I will call build function to create the page :
   @override
   Widget build(BuildContext context) {
+    final provider = context.watch<ProjectProvider>();
     return Scaffold(
       appBar: AppBar(title: Text(isEdit ? "Edit Project " : "Add Project")),
 
@@ -117,12 +117,14 @@ class _AddEditProjectScreenState extends State<AddEditProjectScreen> {
             ),
 
             SizedBox(height: 24),
-            CustomButton(
-              tilte: isEdit ? "Update Project" : "Add Project",
-              icon: isEdit ? Icons.edit : Icons.add,
-              onPressed: _saveProject,
-              width: double.infinity,
-            ),
+            provider.isLoading
+                ? const CircularProgressIndicator()
+                : CustomButton(
+                    tilte: isEdit ? "Update Project" : "Add Project",
+                    icon: isEdit ? Icons.edit : Icons.add,
+                    width: double.infinity,
+                    onPressed: _saveProject,
+                  ),
           ],
         ),
       ),

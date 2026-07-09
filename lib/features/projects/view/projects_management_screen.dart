@@ -1,151 +1,147 @@
 import 'package:flutter/material.dart';
-import 'package:protfolio_app/features/projects/controller/project_controller.dart';
+import 'package:protfolio_app/features/projects/provider/project_provider.dart';
 import 'package:protfolio_app/features/projects/view/add_edit_project_screen.dart';
 import 'package:protfolio_app/core/theme/app_colors.dart';
+import 'package:protfolio_app/shared/widgets/custom_dialog.dart';
 import 'package:protfolio_app/shared/widgets/custom_snackbar.dart';
+import 'package:protfolio_app/shared/widgets/error_view.dart';
+import 'package:protfolio_app/shared/widgets/loading_view.dart';
+import 'package:provider/provider.dart';
 
-class ProjectsManagementScreen extends StatefulWidget {
+class ProjectsManagementScreen extends StatelessWidget {
   const ProjectsManagementScreen({super.key});
-
-  @override
-  State<ProjectsManagementScreen> createState() =>
-      _ProjectsManagementScreenState();
-}
-
-class _ProjectsManagementScreenState extends State<ProjectsManagementScreen> {
-  //step1 ----> here I will Create the class's variables :
-  final ProjectController _projectController = ProjectController();
-
-  //step2 ----> here I will call initState becasue use load functions :
-  @override
-  void initState() {
-    super.initState();
-    _loadProjects();
-  }
-
-  Future<void> _loadProjects() async {
-    await _projectController.loadProjects();
-    setState(() {});
-  }
-
-  //step3 ----> here I will create function becasue delete project  :
-  Future<void> _deleteProject(int id) async {
-    await _projectController.deleteProject(id);
-    // ignore: use_build_context_synchronously
-    CustomSnackbar.success(context, "Project deleted successfully");
-    await _loadProjects();
-  }
-
-  //step4 ----> here I will create function becasue go Confirmation Dialog :
-  void _showDeleteDialog(int id) {
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: Text("Delete Project"),
-        content: Text("Are you sure you want to delete this project?"),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text("Cancel"),
-          ),
-
-          ElevatedButton(
-            onPressed: () async {
-              Navigator.pop(context);
-
-              await _deleteProject(id);
-            },
-            child: const Text("Delete"),
-          ),
-        ],
-      ),
-    );
-  }
 
   //step5 ----> here I will call build function to create the page :
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Projects Management")),
+    return ChangeNotifierProvider(
+      create: (_) => ProjectProvider()..loadData(),
+      builder: (context, child) {
+        final provider = context.watch<ProjectProvider>();
 
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        if (provider.isLoading) {
+          return const LoadingView();
+        }
 
-        onPressed: () async {
-          await Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return AddEditProjectScreen();
+        if (provider.errorMessage != null) {
+          return ErrorView(
+            message: provider.errorMessage!,
+            onRetry: provider.loadData,
+          );
+        }
+        return Scaffold(
+          appBar: AppBar(title: Text("Projects Management")),
+
+          floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.add),
+
+            onPressed: () async {
+              final result = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => ChangeNotifierProvider.value(
+                    value: context.read<ProjectProvider>(),
+                    child: const AddEditProjectScreen(),
+                  ),
+                ),
+              );
+
+              if (result == true && context.mounted) {
+                await provider.loadData();
+              }
+            },
+          ),
+
+          body: RefreshIndicator(
+            onRefresh: provider.loadData,
+            child: ListView.builder(
+              padding: EdgeInsets.all(16),
+              itemCount: provider.projectsCount,
+              itemBuilder: (context, index) {
+                final project = provider.projects[index];
+
+                return Card(
+                  margin: EdgeInsets.only(bottom: 12),
+                  child: ListTile(
+                    title: Text(
+                      project.name,
+                      style: TextStyle(
+                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                    subtitle: Text(
+                      project.techStack,
+                      style: TextStyle(
+                        color: AppColors.textSecondary,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.edit),
+                          onPressed: () async {
+                            final result = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => ChangeNotifierProvider.value(
+                                  value: context.read<ProjectProvider>(),
+                                  child: AddEditProjectScreen(project: project),
+                                ),
+                              ),
+                            );
+
+                            if (result == true && context.mounted) {
+                              provider.loadData();
+                            }
+                          },
+                        ),
+
+                        IconButton(
+                          icon: Icon(Icons.delete, color: Colors.red),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (_) => CustomDialog(
+                                title: "Delete Projetc",
+                                message:
+                                    "Are you sure you want to delete ${project.name}?",
+                                onDelete: () async {
+                                  final success = await context
+                                      .read<ProjectProvider>()
+                                      .deleteProject(project.id);
+
+                                  if (!context.mounted) return;
+
+                                  if (success) {
+                                    CustomSnackbar.success(
+                                      context,
+                                      "Project deleted successfully",
+                                    );
+                                  } else {
+                                    CustomSnackbar.error(
+                                      context,
+                                      provider.errorMessage!,
+                                    );
+                                  }
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                );
               },
             ),
-          );
-
-          await _loadProjects();
-        },
-      ),
-
-      body: RefreshIndicator(
-        onRefresh: _loadProjects,
-        child: ListView.builder(
-          padding: EdgeInsets.all(16),
-          itemCount: _projectController.projects.length,
-          itemBuilder: (context, index) {
-            final project = _projectController.projects[index];
-
-            return Card(
-              margin: EdgeInsets.only(bottom: 12),
-              child: ListTile(
-                title: Text(
-                  project.name,
-                  style: TextStyle(
-                    color: AppColors.textPrimary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-
-                subtitle: Text(
-                  project.techStack,
-                  style: TextStyle(
-                    color: AppColors.textSecondary,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () async {
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return AddEditProjectScreen(project: project);
-                            },
-                          ),
-                        );
-
-                        await _loadProjects();
-                      },
-                    ),
-
-                    IconButton(
-                      icon: Icon(Icons.delete, color: Colors.red),
-                      onPressed: () {
-                        _showDeleteDialog(project.id);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

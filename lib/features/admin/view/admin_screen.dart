@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:protfolio_app/features/profile/view/edit_profile_screen.dart';
 import 'package:protfolio_app/features/projects/view/projects_management_screen.dart';
 import 'package:protfolio_app/features/skills/view/skills_management_screen.dart';
-import 'package:protfolio_app/core/theme/app_colors.dart';
+import 'package:protfolio_app/core/themes/app_colors.dart';
 
 class AdminScreen extends StatelessWidget {
   const AdminScreen({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:protfolio_app/features/admin/view/admin_screen.dart';
-import 'package:protfolio_app/core/theme/app_colors.dart';
+import 'package:protfolio_app/core/themes/app_colors.dart';
 import 'package:protfolio_app/shared/widgets/custom_header.dart';
 
 class SettingsScreen extends StatelessWidget {

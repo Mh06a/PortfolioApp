@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:protfolio_app/core/theme/app_colors.dart';
+import 'package:protfolio_app/core/themes/app_colors.dart';
 import 'package:protfolio_app/features/skills/model/skill.dart';
 import 'package:protfolio_app/features/skills/provider/skills_provider.dart';
 import 'package:protfolio_app/shared/widgets/empty_view.dart';

@@ -3,7 +3,7 @@ import 'package:protfolio_app/features/profile/provider/profile_provider.dart';
 import 'package:protfolio_app/features/projects/provider/project_provider.dart';
 import 'package:protfolio_app/features/skills/provider/skills_provider.dart';
 import 'package:protfolio_app/main_screen.dart';
-import 'package:protfolio_app/core/theme/app_theme.dart';
+import 'package:protfolio_app/core/themes/app_theme.dart';
 import 'package:provider/provider.dart';
 
 void main() {

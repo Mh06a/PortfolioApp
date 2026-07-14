@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:protfolio_app/core/theme/app_colors.dart';
+import 'package:protfolio_app/core/themes/app_colors.dart';
 import 'package:protfolio_app/features/profile/model/profile.dart';
 import 'package:protfolio_app/features/profile/provider/profile_provider.dart';
 import 'package:provider/provider.dart';

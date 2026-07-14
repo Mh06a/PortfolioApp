@@ -13,7 +13,7 @@ class ProfileProvider extends ChangeNotifier {
 
   //step3 ----> here I will create load function :
   Future<void> loadData() async {
-    await _profileController.loadProfile(3);
+    await _profileController.loadProfile(1);
     notifyListeners();
   }
 

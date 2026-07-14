@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:protfolio_app/core/theme/app_colors.dart';
+import 'package:protfolio_app/core/themes/app_colors.dart';
 
 class AppTheme {
   // here I will Create dark Theme :
@@ -52,5 +52,9 @@ class AppTheme {
 
       bodyMedium: TextStyle(color: AppColors.textSecondary),
     ),
+
+    splashFactory: NoSplash.splashFactory,
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
   );
 }

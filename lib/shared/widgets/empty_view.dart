@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:protfolio_app/core/theme/app_colors.dart';
+import 'package:protfolio_app/core/themes/app_colors.dart';
 
 class EmptyView extends StatelessWidget {
   //step1 ----> Create class variables :

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:protfolio_app/core/theme/app_colors.dart';
+import 'package:protfolio_app/core/themes/app_colors.dart';
 import 'package:protfolio_app/core/helpers/launcher_helper.dart';
 import 'package:protfolio_app/features/profile/provider/profile_provider.dart';
 import 'package:protfolio_app/shared/widgets/error_view.dart';

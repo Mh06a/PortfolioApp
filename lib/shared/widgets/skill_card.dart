@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:protfolio_app/features/skills/model/skill.dart';
-import 'package:protfolio_app/core/theme/app_colors.dart';
+import 'package:protfolio_app/core/themes/app_colors.dart';
 
 class SkillCard extends StatelessWidget {
   //step1 ----> here I will Create the class's variables :

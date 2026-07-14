@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:protfolio_app/core/theme/app_colors.dart';
+import 'package:protfolio_app/core/themes/app_colors.dart';
 import 'package:protfolio_app/features/profile/model/profile.dart';
 import 'package:protfolio_app/features/profile/provider/profile_provider.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +13,6 @@ class ProfileCard extends StatelessWidget {
       (provider) => provider.profile,
     );
     return Card(
-      //color: Color.fromARGB(255, 49, 49, 56),
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Row(
@@ -30,29 +29,22 @@ class ProfileCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(6),
-                        decoration: BoxDecoration(
-                          color: Color(0xFFA99CFF),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          profile?.specialization ?? "",
-                          style: TextStyle(color: AppColors.textPrimary),
-                        ),
-                      ),
-
-                      SizedBox(width: 10),
-                    ],
+                  Container(
+                    padding: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFA99CFF),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Text(
+                      profile?.specialization ?? "",
+                      style: TextStyle(color: AppColors.textPrimary),
+                    ),
                   ),
 
                   SizedBox(height: 10),
 
                   Text(
-                    profile?.bio ?? "",
+                    "I build Mobile & Backend Applications using Flutter & Spring Boot.",
                     style: TextStyle(
                       color: AppColors.textSecondary,
                       fontSize: 15,

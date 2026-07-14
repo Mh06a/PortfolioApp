@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:protfolio_app/core/theme/app_colors.dart';
-import 'package:protfolio_app/features/home/provider/home_provider.dart';
 import 'package:protfolio_app/features/skills/model/skill.dart';
+import 'package:protfolio_app/features/skills/provider/skills_provider.dart';
 import 'package:protfolio_app/shared/widgets/empty_view.dart';
 import 'package:protfolio_app/shared/widgets/skill_chip.dart';
 import 'package:provider/provider.dart';
@@ -11,8 +11,6 @@ class SkillsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("اعاد بناء قسم المهارات");
-    print("Skills");
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -24,7 +22,7 @@ class SkillsSection extends StatelessWidget {
 
         SizedBox(height: 12),
 
-        Selector<HomeProvider, List<Skill>>(
+        Selector<SkillsProvider, List<Skill>>(
           selector: (_, provider) => provider.skills,
           builder: (context, skills, child) {
             return skills.isEmpty

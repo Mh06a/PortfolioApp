@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:protfolio_app/features/profile/provider/profile_provider.dart';
 import 'package:protfolio_app/features/profile/view/edit_profile_screen.dart';
 import 'package:protfolio_app/features/projects/view/projects_management_screen.dart';
 import 'package:protfolio_app/features/skills/view/skills_management_screen.dart';
 import 'package:protfolio_app/core/theme/app_colors.dart';
-import 'package:provider/provider.dart';
 
 class AdminScreen extends StatelessWidget {
   const AdminScreen({super.key});
@@ -50,12 +48,7 @@ class AdminScreen extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (_) => ChangeNotifierProvider.value(
-                        value: context.read<ProfileProvider>(),
-                        child: const EditProfileScreen(),
-                      ),
-                    ),
+                    MaterialPageRoute(builder: (_) => EditProfileScreen()),
                   );
                 },
               ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:protfolio_app/core/theme/app_colors.dart';
-import 'package:protfolio_app/features/home/provider/home_provider.dart';
 import 'package:protfolio_app/features/profile/model/profile.dart';
+import 'package:protfolio_app/features/profile/provider/profile_provider.dart';
 import 'package:provider/provider.dart';
 
 class ProfileCard extends StatelessWidget {
@@ -9,8 +9,7 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("اعاد بناء قسم بطايق الملف");
-    final profile = context.select<HomeProvider, Profile?>(
+    final profile = context.select<ProfileProvider, Profile?>(
       (provider) => provider.profile,
     );
     return Card(

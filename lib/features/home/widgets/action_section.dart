@@ -6,7 +6,6 @@ class ActionSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("اعاد بناء قسم الزر");
     return CustomButton(
       tilte: "Download CV",
       icon: Icons.download,

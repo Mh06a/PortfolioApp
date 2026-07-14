@@ -31,7 +31,7 @@ public class ProfileDTO {
     @Setter
     @Getter
     @NotBlank(message = "The bio must not be blank")
-    @Size(min = 10, max = 100)
+    @Size(min = 10, max = 500)
     private String bio;
 
     @Setter

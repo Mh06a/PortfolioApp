@@ -9,14 +9,12 @@ A full-stack portfolio management application built with **Flutter**, **Spring B
 
 | Home | Projects |
 |------|----------|
-| <img width="388" height="662" alt="Screenshot 2026-07-16 200307" src="https://github.com/user-attachments/assets/2324c722-4cac-4c1f-afef-3ca4af754d07" />
- | <img width="392" height="660" alt="Screenshot 2026-07-16 200344" src="https://github.com/user-attachments/assets/754f69a0-1c61-479c-b99a-cfa0ed1bd459" />
+| <img width="388" height="662" alt="Screenshot 2026-07-16 200307" src="https://github.com/user-attachments/assets/2324c722-4cac-4c1f-afef-3ca4af754d07" />| <img width="392" height="660" alt="Screenshot 2026-07-16 200344" src="https://github.com/user-attachments/assets/754f69a0-1c61-479c-b99a-cfa0ed1bd459" />
 |
 
 | Skills | Profile |
 |--------|---------|
-| <img width="392" height="662" alt="Screenshot 2026-07-16 200325" src="https://github.com/user-attachments/assets/3dd75172-e515-44d4-8b18-9218e521dac0" />
-| <img width="391" height="658" alt="Screenshot 2026-07-16 200356" src="https://github.com/user-attachments/assets/5c15e260-5944-4b2e-9448-3ee9c1ccb9fe" />
+| <img width="392" height="662" alt="Screenshot 2026-07-16 200325" src="https://github.com/user-attachments/assets/3dd75172-e515-44d4-8b18-9218e521dac0" />| <img width="391" height="658" alt="Screenshot 2026-07-16 200356" src="https://github.com/user-attachments/assets/5c15e260-5944-4b2e-9448-3ee9c1ccb9fe" />
  |
 
 | Settings |  |

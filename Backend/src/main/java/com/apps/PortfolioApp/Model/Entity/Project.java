@@ -10,6 +10,7 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id ;
     private String name;
+    @Column(length = 500)
     private String description;
     @Column(name = "tech_stack")
     private String techStack;

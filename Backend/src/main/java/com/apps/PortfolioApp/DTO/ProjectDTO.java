@@ -12,7 +12,7 @@ public class ProjectDTO {
     private String name;
     // ---------------
     @NotBlank(message = "The project description must not be empty")
-    @Size(max = 100)
+    @Size(max = 500)
     private String description;
     // ---------------
     @NotBlank(message = "The project techStack must not be empty")

@@ -230,8 +230,8 @@ Planned features for future releases:
 
 **Mansour Hussain**
 
-- GitHub: [https://github.com/your-username](https://github.com/Mh06a)
-- LinkedIn: [https://linkedin.com/in/your-profile](https://www.linkedin.com/in/mansour-hussain-b33113217/)
+- GitHub: https://github.com/Mh06a
+- LinkedIn: https://www.linkedin.com/in/mansourhussain/
 - Email: mansour.06.ab.06@gmail.com
 
 ---
